@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="description" content="Unofficial fan-made tribute. Place Christy-inspired stickers anywhere. Not affiliated with or endorsed by Christy Canyon." />
+  <meta name="theme-color" content="#0d0a12" />
+  <meta property="og:title" content="PLACE CHRISTY — Unofficial Fan Tribute" />
+  <meta property="og:description" content="Need a little more Christy in your day? Tap to place tribute stickers." />
+  <meta property="og:type" content="website" />
+  <title>PLACE CHRISTY — Unofficial Fan Tribute</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div id="app">
+    <!-- Hero / Controls (safe zone) -->
+    <header class="hero" id="hero">
+      <p class="eyebrow">UNOFFICIAL FAN-MADE TRIBUTE</p>
+      <h1 class="title">
+        Need a little more<br />
+        <span class="highlight">Christy</span><br />
+        in your day?
+      </h1>
+      <p class="subtitle">
+        Tap anywhere on the canvas or press the button to place a Christy-inspired tribute.
+      </p>
+
+      <div class="controls">
+        <button id="placeBtn" class="btn primary" type="button" aria-label="Place a Christy sticker">
+          Place Christy <span class="sparkle">✦</span>
+        </button>
+        <button id="clearBtn" class="btn secondary" type="button" aria-label="Clear all stickers">
+          Clear
+        </button>
+        <button id="shareBtn" class="btn secondary" type="button" aria-label="Share this page">
+          Share
+        </button>
+      </div>
+
+      <p class="counter" id="counter" aria-live="polite">
+        Christys placed: <strong id="count">0</strong>
+      </p>
+    </header>
+
+    <!-- Interactive canvas -->
+    <main id="canvas" class="canvas" role="application" aria-label="Tap or click to place Christy stickers">
+      <!-- Stickers are injected here -->
+    </main>
+
+    <!-- Easter egg toast -->
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+    <footer class="footer">
+      <p>Unofficial fan-made tribute project. Not affiliated with or endorsed by Christy Canyon.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

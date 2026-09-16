@@ -1,0 +1,432 @@
+/* PLACE CHRISTY — Unofficial fan tribute
+   Original design. Mobile-first. Dark elegant + playful retro accent. */
+
+:root {
+  --bg: #0d0a12;
+  --bg-elevated: #16121f;
+  --surface: #1e1830;
+  --text: #f4f0ff;
+  --text-muted: #a89cc4;
+  --accent: #ff6bcb;
+  --accent-soft: #ff9ad8;
+  --accent-glow: rgba(255, 107, 203, 0.45);
+  --gold: #ffd36b;
+  --cyan: #6bffef;
+  --purple: #b56bff;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --radius: 16px;
+  --font: "Outfit", system-ui, -apple-system, sans-serif;
+  --font-display: "Space Grotesk", "Outfit", system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100%;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-weight: 400;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+#app {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  isolation: isolate;
+}
+
+/* Subtle animated gradient background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(181, 107, 255, 0.18), transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(255, 107, 203, 0.12), transparent 45%),
+    radial-gradient(ellipse 50% 60% at 50% 90%, rgba(107, 255, 239, 0.08), transparent 50%),
+    var(--bg);
+  pointer-events: none;
+}
+
+/* Soft noise / grain for texture */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* ========== HERO ========== */
+.hero {
+  position: relative;
+  z-index: 20;
+  flex-shrink: 0;
+  padding: calc(1.5rem + var(--safe-top)) 1.25rem 1.25rem;
+  text-align: center;
+  background: linear-gradient(
+    180deg,
+    rgba(13, 10, 18, 0.92) 0%,
+    rgba(13, 10, 18, 0.75) 70%,
+    transparent 100%
+  );
+  pointer-events: auto;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  margin-bottom: 0.85rem;
+  opacity: 0.95;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 6.5vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+.highlight {
+  display: inline-block;
+  background: linear-gradient(120deg, var(--accent) 0%, var(--gold) 50%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.15); }
+}
+
+.subtitle {
+  font-size: clamp(0.9rem, 2.8vw, 1.05rem);
+  color: var(--text-muted);
+  max-width: 28rem;
+  margin: 0 auto 1.35rem;
+  line-height: 1.55;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  padding: 0.75rem 1.35rem;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  min-height: 44px; /* iOS touch target */
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, var(--accent) 0%, #e84ab0 100%);
+  color: #1a0a14;
+  box-shadow: 0 4px 20px var(--accent-glow), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+.btn.primary:hover {
+  box-shadow: 0 6px 28px var(--accent-glow), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+  transform: translateY(-1px);
+}
+
+.btn.secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.btn.secondary:hover {
+  background: #2a2340;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.sparkle {
+  display: inline-block;
+  margin-left: 0.15em;
+  animation: spin-sparkle 3s linear infinite;
+}
+
+@keyframes spin-sparkle {
+  0%, 90%, 100% { transform: rotate(0deg) scale(1); }
+  95% { transform: rotate(20deg) scale(1.2); }
+}
+
+.counter {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.counter strong {
+  color: var(--gold);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ========== CANVAS ========== */
+.canvas {
+  position: relative;
+  flex: 1;
+  min-height: 55vh;
+  width: 100%;
+  cursor: crosshair;
+  overflow: hidden;
+  /* Allow touches to place stickers; prevent scroll interference on mobile */
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Stickers */
+.sticker {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  will-change: transform, opacity;
+  animation: pop-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  z-index: 5;
+}
+
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.2) rotate(var(--rot, 0deg));
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.12) rotate(var(--rot, 0deg));
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(var(--rot, 0deg));
+  }
+}
+
+/* Sticker variants — pure CSS / SVG, no external images */
+.sticker-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 14px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.35),
+    0 0 0 1.5px rgba(255, 255, 255, 0.25) inset;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Variant styles */
+.sticker.v1 .sticker-inner {
+  background: linear-gradient(145deg, #ff6bcb 0%, #ff9ad8 100%);
+  color: #2a0a1a;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.sticker.v2 .sticker-inner {
+  background: linear-gradient(145deg, #6bffef 0%, #a0fff5 100%);
+  color: #0a2a28;
+}
+
+.sticker.v3 .sticker-inner {
+  background: linear-gradient(145deg, #ffd36b 0%, #ffe9a8 100%);
+  color: #2a220a;
+}
+
+.sticker.v4 .sticker-inner {
+  background: linear-gradient(145deg, #b56bff 0%, #d4a0ff 100%);
+  color: #1a0a2a;
+}
+
+.sticker.v5 .sticker-inner {
+  background: linear-gradient(145deg, #ff6b6b 0%, #ff9a9a 100%);
+  color: #2a0a0a;
+}
+
+.sticker.v6 .sticker-inner {
+  background: linear-gradient(145deg, #6b9bff 0%, #a0c0ff 100%);
+  color: #0a122a;
+}
+
+.sticker .emoji {
+  font-size: 1.35em;
+  line-height: 1;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
+}
+
+.sticker .label {
+  font-size: 0.78em;
+  opacity: 0.95;
+}
+
+/* ========== TOAST / EASTER EGGS ========== */
+.toast {
+  position: fixed;
+  bottom: calc(5.5rem + var(--safe-bottom));
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 50;
+  max-width: min(90vw, 320px);
+  padding: 0.85rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  position: relative;
+  z-index: 20;
+  flex-shrink: 0;
+  padding: 1rem 1.25rem calc(1rem + var(--safe-bottom));
+  text-align: center;
+  background: linear-gradient(
+    0deg,
+    rgba(13, 10, 18, 0.95) 0%,
+    rgba(13, 10, 18, 0.7) 80%,
+    transparent 100%
+  );
+  pointer-events: auto;
+}
+
+.footer p {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  max-width: 22rem;
+  margin: 0 auto;
+  line-height: 1.45;
+  opacity: 0.85;
+}
+
+/* ========== DESKTOP / LARGER ========== */
+@media (min-width: 640px) {
+  .hero {
+    padding-top: calc(2.25rem + var(--safe-top));
+    padding-bottom: 1.5rem;
+  }
+
+  .title {
+    font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+  }
+
+  .subtitle {
+    margin-bottom: 1.5rem;
+  }
+
+  .controls {
+    gap: 0.75rem;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 0.85rem 1.6rem;
+  }
+
+  .canvas {
+    min-height: 60vh;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .footer {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .sticker {
+    animation: none;
+    opacity: 1;
+    transform: scale(1) rotate(var(--rot, 0deg));
+  }
+
+  .highlight {
+    animation: none;
+  }
+
+  .sparkle {
+    animation: none;
+  }
+
+  .btn {
+    transition: none;
+  }
+}
