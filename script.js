@@ -21,10 +21,14 @@
     200: "200?! You're committed. Respect.",
   };
 
-  const FALLBACK_IMAGES = [
-    "christy-001.jpg", "christy-002.jpg", "christy-003.jpg", "christy-004.jpg",
-    "christy-005.jpg", "christy-006.jpg", "christy-007.jpg", "christy-008.jpg",
-    "christy-009.jpg", "christy-010.jpg"
+  // Photo sources: embedded data URIs (from photos.js) or file paths
+  const FALLBACK_IMAGES = (typeof window !== "undefined" && window.CHRISTY_PHOTOS && window.CHRISTY_PHOTOS.length)
+    ? window.CHRISTY_PHOTOS.slice()
+    : [
+    "assets/christy/christy-001.jpg", "assets/christy/christy-002.jpg", "assets/christy/christy-003.jpg",
+    "assets/christy/christy-004.jpg", "assets/christy/christy-005.jpg", "assets/christy/christy-006.jpg",
+    "assets/christy/christy-007.jpg", "assets/christy/christy-008.jpg", "assets/christy/christy-009.jpg",
+    "assets/christy/christy-010.jpg"
   ];
 
   const canvas = document.getElementById("canvas");
@@ -107,7 +111,7 @@
     el.style.transform = "translate(-50%, -50%) scale(" + scale + ") rotate(" + rotation + "deg)";
 
     const img = document.createElement("img");
-    img.src = "assets/christy/" + file;
+    img.src = (file.indexOf("data:") === 0 || file.indexOf("assets/") === 0) ? file : ("assets/christy/" + file);
     img.alt = "Christy Canyon tribute photo";
     img.draggable = false;
     img.loading = "lazy";
@@ -223,7 +227,7 @@
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (data) {
       if (data && Array.isArray(data.images) && data.images.length) {
-        imageFiles = data.images.map(function (img) { return img.file; });
+        // Keep embedded photos if already loaded; manifest is for attribution only
       }
     })
     .catch(function () {});
